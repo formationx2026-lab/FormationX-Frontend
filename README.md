@@ -34,3 +34,46 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+## 🏠 Public Pages
+
+| Page              | Slug                           |
+| ----------------- | ------------------------------ |
+| Home              | `/`                            |
+| All Hackathons    | `/hackathons`                  |
+| Single Hackathon  | `/hackathons/{hackathon-slug}` |
+| Organizer Profile | `/organizers/{organizer-slug}` |
+| Student Profile   | `/students/{username}`         |
+| Tags / Tech       | `/tags/{tag-slug}`             |
+| Cities            | `/cities/{city-slug}`          |
+
+
+## 🧑‍💻 Auth Pages
+
+| Page            | Slug                    |
+| --------------- | ----------------------- |
+| Login           | `/auth/login`           |
+| Register        | `/auth/register`        |
+| Forgot Password | `/auth/forgot-password` |
+
+
+## Organizer Dashboard
+
+| Page             | Slug                                        |
+| ---------------- | ------------------------------------------- |
+| Dashboard        | `/dashboard`                                |
+| My Hackathons    | `/dashboard/hackathons`                     |
+| Create Hackathon | `/dashboard/hackathons/create`              |
+| Edit Hackathon   | `/dashboard/hackathons/{slug}/edit`         |
+| Applications     | `/dashboard/hackathons/{slug}/applications` |
+
+
+## 🎓 Student Dashboard
+
+| Page               | Slug                    |
+| ------------------ | ----------------------- |
+| Dashboard          | `/student/dashboard`    |
+| Applied Hackathons | `/student/applications` |
+| Saved Hackathons   | `/student/saved`        |
