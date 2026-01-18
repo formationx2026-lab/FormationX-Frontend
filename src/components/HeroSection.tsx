@@ -1,4 +1,3 @@
-// app/components/HeroSection.tsx
 "use client";
 
 import React from 'react';
@@ -12,227 +11,154 @@ import {
   AnimatedGlowingOrb,
   AnimatedBadge,
   AnimatedStatItem,
-  EnhancedButton
 } from './ui/enhanced-components';
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen bg-gradient-to-br from-gray-900 via-black to-gray-900 overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center bg-[#030711] overflow-hidden selection:bg-[#06b6d4] selection:text-white">
       
-      {/* Enhanced Background Pattern with Animation */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent,rgba(0,0,0,0.2),transparent)]"></div>
+      {/* --- BACKGROUND LAYERS --- */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#0f172a] via-[#020617] to-[#000000]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_20%,#000000_100%)] pointer-events-none z-[1]" />
       
-      {/* Animated Grid Pattern Overlay */}
-      <AnimatedBackgroundGrid />
+      {/* Subtle Cyan Glow behind text */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] opacity-20 pointer-events-none"
+        style={{
+          background: "radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%)",
+          filter: "blur(60px)"
+        }}
+      />
       
-      {/* Floating Hackathon Icons */}
-      <FloatingHackathonIcons />
+      {/* Animated Elements */}
+      <div className="z-0">
+        <AnimatedBackgroundGrid />
+        <FloatingHackathonIcons />
+        <FloatingCodeLines />
+      </div>
       
-      {/* Floating Code Lines */}
-      <FloatingCodeLines />
-      
-      {/* Enhanced Glowing Orbs with Animation */}
-      <AnimatedGlowingOrb className="top-1/4 -left-20 w-72 h-72 bg-[color:var(--primary-soft)]" />
-      <AnimatedGlowingOrb className="bottom-1/4 -right-20 w-72 h-72 bg-purple-500/10" />
+      {/* Softened Orbs */}
+      <AnimatedGlowingOrb className="top-[15%] -left-[5%] w-[400px] h-[400px] opacity-20 bg-[#06b6d4] blur-[90px]" />
+      <AnimatedGlowingOrb className="bottom-[15%] -right-[5%] w-[400px] h-[400px] opacity-10 bg-purple-600 blur-[90px]" />
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-16">
-        <div className="max-w-6xl mx-auto">
+      {/* --- MAIN CONTENT --- */}
+      <div className="relative z-10 container mx-auto px-4 mt-8 mb-8 sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto flex flex-col items-center">
 
-          {/* Enhanced Badge */}
+          {/* 1. Pill Badge */}
           <motion.div 
-            className="flex justify-center mb-12"
             initial={{ y: -20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            className="mb-6"
           >
-            <AnimatedBadge>
-              <motion.div 
-                className="w-2 h-2 rounded-full bg-green-500"
-                animate={{ scale: [1, 1.5, 1] }}
-                transition={{ duration: 2, repeat: Infinity }}
-              />
-              <span className="text-gray-300 text-sm font-medium">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm shadow-lg shadow-black/20 hover:border-white/20 transition-colors">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#06b6d4] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#06b6d4]"></span>
+              </span>
+              <span className="text-gray-300 text-xs sm:text-sm font-medium tracking-wide">
                 The Hackathon Operating System
               </span>
-            </AnimatedBadge>
-          </motion.div>
-
-          {/* Heading with Enhanced Animations */}
-          <motion.div 
-            className="text-center mb-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="inline-block relative">
-              <motion.h2 
-                className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight"
-                initial={{ y: 30, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ duration: 0.6 }}
-              >
-                Transform Hackathons
-              </motion.h2>
-
-              {/* Enhanced AI Badge */}
-              <motion.div 
-                className="absolute top-1/2 right-0 translate-x-[20%] sm:left-full sm:right-auto sm:translate-x-0 ml-0 sm:ml-4 -translate-y-1/2"
-                initial={{ rotate: -45, scale: 0 }}
-                animate={{ rotate: 45, scale: 1 }}
-                transition={{ 
-                  type: "spring",
-                  stiffness: 200,
-                  damping: 15,
-                  delay: 0.3 
-                }}
-                whileHover={{ 
-                  rotate: 90,
-                  scale: 1.2,
-                  transition: { type: "spring", stiffness: 300 }
-                }}
-              >
-                <div className="relative">
-                  <motion.div 
-                    className="w-8 h-8 sm:w-12 sm:h-12 bg-gradient-to-br from-[color:var(--primary)] to-cyan-400 rounded-lg"
-                    animate={{ 
-                      boxShadow: [
-                        "0 0 20px var(--primary-soft)",
-                        "0 0 40px var(--primary-soft)",
-                        "0 0 20px var(--primary-soft)"
-                      ]
-                    }}
-                    transition={{ duration: 2, repeat: Infinity }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <motion.span 
-                      className="text-white font-bold text-lg sm:text-2xl"
-                      animate={{ 
-                        rotate: [-45, 45, -45],
-                        scale: [1, 1.1, 1]
-                      }}
-                      transition={{ 
-                        duration: 4, 
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
-                    >
-                      AI
-                    </motion.span>
-                  </div>
-                </div>
-              </motion.div>
             </div>
-
-            <motion.h2 
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight mt-2"
-              initial={{ y: 30, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              From Chaos to Success
-            </motion.h2>
           </motion.div>
 
-          {/* Description with Animation */}
+          {/* 2. Headline - Tighter & Cleaner */}
+          <div className="text-center mb-8 relative z-20">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: "easeOut" }}
+              className="flex flex-col items-center"
+            >
+              {/* Main Headline Group */}
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-tight leading-[1.1] drop-shadow-2xl">
+                Transform Hackathons
+                <span className="relative inline-block whitespace-nowrap">
+                
+                </span>
+              </h1>
+
+              {/* Sub Headline - Better Contrast */}
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold text-[#94a3b8] tracking-tight leading-[1.1] mt-1 sm:mt-2">
+                From Chaos to Success
+              </h1>
+            </motion.div>
+          </div>
+
+          {/* 3. Description - More Compact */}
           <motion.div 
             className="flex justify-center mb-10"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.8 }}
           >
-            <motion.p 
-              className="text-center max-w-3xl mx-auto text-gray-300 leading-relaxed"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              The complete infrastructure platform that enables college students to confidently host hackathons and participants
-              to convert real work into career opportunities.
-            </motion.p>
+            <p className="text-center max-w-2xl mx-auto text-base sm:text-lg text-gray-400 leading-relaxed font-normal">
+              The complete infrastructure platform that enables college students to confidently host hackathons and participants to convert real work into career opportunities.
+            </p>
           </motion.div>
 
-          {/* CTA Buttons with Enhanced Components */}
+          {/* 4. Buttons - Premium & Solid */}
           <motion.div 
-            className="flex justify-center items-center gap-6 flex-wrap"
+            className="flex flex-col sm:flex-row items-center gap-4 w-full justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8 }}
+            transition={{ delay: 0.6 }}
           >
             <Link href="#">
-              <EnhancedButton variant="primary">
-                Get started
-              </EnhancedButton>
+              <motion.button
+                className="group relative px-8 py-3.5 rounded-full font-semibold text-white min-w-[160px] overflow-hidden bg-[#06b6d4]"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700" />
+                <span className="relative z-10">Get started</span>
+                <div className="absolute inset-0 rounded-full ring-1 ring-inset ring-white/20" />
+              </motion.button>
             </Link>
 
-            <EnhancedButton variant="secondary">
+            <motion.button
+              className="px-8 py-3.5 rounded-full font-semibold text-gray-300 border border-white/10 min-w-[160px] bg-white/[0.02] hover:bg-white/[0.05] transition-all hover:text-white hover:border-white/20"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+            >
               Find Hackathons
-            </EnhancedButton>
+            </motion.button>
           </motion.div>
 
-          {/* Enhanced Stats */}
+          {/* 5. Stats Section */}
           <motion.div 
-            className="mt-20"
+            className="mt-12  border-t border-white/5 w-full"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 max-w-4xl mx-auto text-center">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-4xl mx-auto">
               <AnimatedStatItem 
                 icon={Users} 
                 value="1000+" 
-                label="Colleges Supported"
+                label="Colleges Supported" 
                 delay={0}
               />
               <AnimatedStatItem 
                 icon={Shield} 
                 value="99%" 
-                label="Event Success Rate"
-                delay={0.2}
+                label="Success Rate" 
+                delay={0.1}
               />
               <AnimatedStatItem 
                 icon={Zap} 
                 value="50K+" 
-                label="Participants Connected"
-                delay={0.4}
+                label="Participants" 
+                delay={0.2}
               />
             </div>
           </motion.div>
 
         </div>
       </div>
-
-      {/* Bottom Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-gray-900 to-transparent"></div>
-
-      {/* Additional Floating Elements */}
-      <motion.div
-        className="absolute top-1/3 left-1/4 w-4 h-4 rounded-full bg-cyan-500/20"
-        animate={{
-          y: [0, -50, 0],
-          x: [0, 20, 0],
-          scale: [1, 1.5, 1],
-        }}
-        transition={{
-          duration: 3,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
       
-      <motion.div
-        className="absolute bottom-1/3 right-1/4 w-3 h-3 rounded-full bg-purple-500/20"
-        animate={{
-          y: [0, 40, 0],
-          x: [0, -20, 0],
-          scale: [1, 2, 1],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
     </section>
   );
 };

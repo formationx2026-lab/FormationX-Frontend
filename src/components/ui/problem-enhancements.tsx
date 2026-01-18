@@ -1,15 +1,7 @@
-// app/components/ui/problem-enhancements.tsx
 "use client";
 
 import { motion } from "framer-motion";
 import { 
-  AlertTriangle, 
-  XCircle, 
-  Users, 
-  Clock, 
-  MessageSquareX, 
-  HelpCircle, 
-  Store,
   Cpu,
   Code,
   Server,
@@ -19,49 +11,38 @@ import {
 } from "lucide-react";
 import React from "react";
 
-// Floating Tech Particles for Background
+// 1. Optimized Background: Static, clean tech icons (No infinite animation)
 export const TechParticles = () => {
   const particles = [
-    { icon: Code, x: "5%", y: "10%", delay: 0 },
-    { icon: Terminal, x: "85%", y: "20%", delay: 0.5 },
-    { icon: Cpu, x: "15%", y: "80%", delay: 1 },
-    { icon: Server, x: "75%", y: "70%", delay: 1.5 },
-    { icon: Database, x: "25%", y: "40%", delay: 2 },
-    { icon: Zap, x: "90%", y: "60%", delay: 2.5 },
+    { icon: Code, x: "5%", y: "10%" },
+    { icon: Terminal, x: "85%", y: "20%" },
+    { icon: Cpu, x: "15%", y: "80%" },
+    { icon: Server, x: "75%", y: "70%" },
+    { icon: Database, x: "25%", y: "40%" },
+    { icon: Zap, x: "90%", y: "60%" },
   ];
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {particles.map(({ icon: Icon, x, y, delay }, index) => (
-        <motion.div
+    <div className="absolute inset-0 overflow-hidden pointer-events-none select-none">
+      {particles.map(({ icon: Icon, x, y }, index) => (
+        <div
           key={index}
-          className="absolute text-cyan-400/10"
+          className="absolute text-cyan-500/10"
           style={{
             left: x,
             top: y,
             width: 24,
             height: 24,
           }}
-          animate={{
-            y: [0, -40, 0],
-            rotate: [0, 180, 360],
-            opacity: [0.1, 0.3, 0.1],
-          }}
-          transition={{
-            duration: 4 + Math.random() * 2,
-            repeat: Infinity,
-            delay: delay,
-            ease: "easeInOut",
-          }}
         >
           <Icon className="w-full h-full" />
-        </motion.div>
+        </div>
       ))}
     </div>
   );
 };
 
-// Animated Problem Card Component
+// 2. Optimized Card: Snappy interactions, no heavy processing
 export const AnimatedProblemCard = ({ 
   icon: Icon, 
   title, 
@@ -75,261 +56,98 @@ export const AnimatedProblemCard = ({
 }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ 
         delay: index * 0.1, 
-        duration: 0.5,
-        type: "spring",
-        stiffness: 100 
+        duration: 0.4,
+        ease: "easeOut" 
       }}
       viewport={{ once: true, margin: "-50px" }}
-      whileHover={{ 
-        scale: 1.03,
-        y: -5,
-        transition: { type: "spring", stiffness: 300 }
-      }}
-      className="group relative p-6 rounded-2xl bg-gray-900/60 backdrop-blur border border-white/10 hover:border-cyan-500/40 transition-all duration-300 overflow-hidden"
+      className="group relative p-6 rounded-2xl bg-gray-900/40 backdrop-blur-sm border border-white/5 hover:border-cyan-500/30 transition-all duration-300 h-full"
     >
-      {/* Hover glow effect */}
-      <motion.div
-        className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100"
-        initial={false}
-        transition={{ duration: 0.3 }}
-      />
+      {/* Subtle Gradient Background on Hover (CSS Transition is faster than Motion) */}
+      <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
       
-      {/* Floating icon animation */}
-      <motion.div 
-        className="relative w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition"
-        whileHover={{ rotate: 10 }}
-        transition={{ type: "spring", stiffness: 400 }}
-      >
-        <motion.div
-          animate={{ 
-            scale: [1, 1.2, 1],
-            rotate: [0, 5, 0]
-          }}
-          transition={{ 
-            duration: 2, 
-            repeat: Infinity,
-            delay: index * 0.2 
-          }}
-        >
-          <Icon className="w-6 h-6 text-cyan-400" />
-        </motion.div>
-        
-        {/* Particle effect */}
-        <motion.div
-          className="absolute inset-0 rounded-lg border border-cyan-400/30"
-          animate={{ 
-            scale: [1, 1.1, 1],
-            opacity: [0, 0.5, 0]
-          }}
-          transition={{ 
-            duration: 2, 
-            repeat: Infinity,
-            delay: index * 0.2 
-          }}
-        />
-      </motion.div>
+      {/* Icon Container */}
+      <div className="relative w-12 h-12 rounded-lg bg-cyan-500/10 flex items-center justify-center mb-4 group-hover:bg-cyan-500/20 transition-colors duration-300">
+        <Icon className="w-6 h-6 text-cyan-400" />
+      </div>
 
-      <h3 className="relative text-lg font-semibold text-white mb-2">
-        <motion.span
-          className="inline-block"
-          whileHover={{ x: 5 }}
-          transition={{ type: "spring", stiffness: 400 }}
-        >
-          {title}
-        </motion.span>
+      <h3 className="relative text-lg font-semibold text-white mb-2 group-hover:text-cyan-400 transition-colors duration-300">
+        {title}
       </h3>
 
-      <motion.p 
-        className="relative text-gray-400 text-sm leading-relaxed"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: index * 0.1 + 0.2 }}
-        viewport={{ once: true }}
-      >
+      <p className="relative text-gray-400 text-sm leading-relaxed">
         {description}
-      </motion.p>
+      </p>
 
-      {/* Animated underline on hover */}
-      <motion.div
-        className="absolute bottom-0 left-6 right-6 h-0.5 bg-gradient-to-r from-transparent via-cyan-500 to-transparent"
-        initial={{ scaleX: 0 }}
-        whileHover={{ scaleX: 1 }}
-        transition={{ duration: 0.3 }}
-      />
+      {/* Simple accent line */}
+      <div className="absolute bottom-0 left-0 h-[2px] bg-cyan-500/50 w-0 group-hover:w-full transition-all duration-500 ease-out" />
     </motion.div>
   );
 };
 
-// Animated Glowing Orb
+// 3. Optimized Glow: Static Blur (High performance)
 export const AnimatedGlowOrb = () => {
   return (
-    <motion.div
-      className="absolute top-0 left-0 w-72 h-72 bg-cyan-500/10 rounded-full blur-[120px]"
-      animate={{
-        scale: [1, 1.2, 1],
-        opacity: [0.1, 0.2, 0.1],
-        x: [0, 20, 0],
-        y: [0, -20, 0],
-      }}
-      transition={{
-        duration: 5,
-        repeat: Infinity,
-        ease: "easeInOut",
-      }}
-    />
+    <div className="absolute top-0 left-0 w-96 h-96 bg-cyan-500/5 rounded-full blur-[100px] pointer-events-none" />
   );
 };
 
-// Animated Section Header
+// 4. Section Header: Clean fade-in only
 export const AnimatedSectionHeader = () => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: -20 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.5 }}
       viewport={{ once: true }}
-      className="text-center mb-20"
+      className="text-center mb-16 relative z-10"
     >
-      <motion.span 
-        className="inline-block text-cyan-400 text-sm uppercase tracking-widest mb-4"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        viewport={{ once: true }}
-      >
+      <span className="inline-block text-cyan-400 text-sm font-bold uppercase tracking-widest mb-3">
         The Challenge
-      </motion.span>
+      </span>
       
-      <motion.h2 
-        className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6"
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
-        viewport={{ once: true }}
-      >
+      <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
         Why{" "}
-        <motion.span 
-          className="text-cyan-400 relative inline-block"
-          animate={{ 
-            textShadow: [
-              "0 0 20px rgba(6, 182, 212, 0)",
-              "0 0 20px rgba(6, 182, 212, 0.5)",
-              "0 0 20px rgba(6, 182, 212, 0)"
-            ]
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-cyan-200">
           Hackathons Fail
-        </motion.span>
-      </motion.h2>
+        </span>
+      </h2>
       
-      <motion.p 
-        className="text-gray-400 max-w-2xl mx-auto text-lg"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.4 }}
-        viewport={{ once: true }}
-      >
+      <p className="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed">
         College hackathon organizers face recurring operational challenges
-        that existing platforms don&apos;t address.
-      </motion.p>
+        that existing platforms don&apos;t address effectively.
+      </p>
     </motion.div>
   );
 };
 
-// Animated Summary Box
+// 5. Summary Box: Cleaned up visual noise
 export const AnimatedSummaryBox = () => {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
       viewport={{ once: true }}
-      className="mt-20 max-w-3xl mx-auto relative"
+      className="mt-16 max-w-3xl mx-auto relative"
     >
-      <motion.div
-        className="absolute -inset-4 bg-gradient-to-r from-cyan-500/10 to-purple-500/10 rounded-3xl blur-xl"
-        animate={{ opacity: [0.1, 0.2, 0.1] }}
-        transition={{ duration: 3, repeat: Infinity }}
-      />
+      {/* Static Glow instead of animated */}
+      <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-2xl blur-lg opacity-50" />
       
-      <div className="relative p-8 rounded-2xl border border-cyan-500/30 bg-cyan-500/5 backdrop-blur-sm">
-        <motion.p 
-          className="text-lg text-gray-400 italic"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 0.2 }}
-          viewport={{ once: true }}
-        >
+      <div className="relative p-8 rounded-xl border border-cyan-500/20 bg-gray-900/80 backdrop-blur-md">
+        <p className="text-lg text-gray-300 italic text-center font-medium">
           &quot;College hackathon organizers lack a reliable, end-to-end
           infrastructure and operational support system, resulting in
           frequent event cancellations, mismanagement, and loss of trust.&quot;
-        </motion.p>
+        </p>
         
-        <motion.div
-          className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-cyan-500/30"
-          animate={{ 
-            scale: [1, 1.5, 1],
-            opacity: [0.5, 1, 0.5]
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-        />
-        <motion.div
-          className="absolute -bottom-2 -left-2 w-4 h-4 rounded-full bg-purple-500/30"
-          animate={{ 
-            scale: [1, 1.5, 1],
-            opacity: [0.5, 1, 0.5]
-          }}
-          transition={{ duration: 2, repeat: Infinity, delay: 1 }}
-        />
+        {/* Decorative static dots */}
+        <div className="absolute -top-1.5 -right-1.5 w-3 h-3 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.5)]" />
+        <div className="absolute -bottom-1.5 -left-1.5 w-3 h-3 rounded-full bg-purple-500 shadow-[0_0_10px_rgba(168,85,247,0.5)]" />
       </div>
     </motion.div>
-  );
-};
-
-// Floating Connection Lines
-export const FloatingConnectionLines = () => {
-  const lines = [
-    { x1: "10%", y1: "30%", x2: "30%", y2: "50%", delay: 0 },
-    { x1: "70%", y1: "40%", x2: "85%", y2: "60%", delay: 0.5 },
-    { x1: "40%", y1: "70%", x2: "60%", y2: "85%", delay: 1 },
-    { x1: "20%", y1: "60%", x2: "35%", y2: "75%", delay: 1.5 },
-  ];
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      <svg className="w-full h-full">
-        {lines.map((line, index) => (
-          <motion.line
-            key={index}
-            x1={line.x1}
-            y1={line.y1}
-            x2={line.x2}
-            y2={line.y2}
-            stroke="url(#gradient)"
-            strokeWidth="0.5"
-            strokeDasharray="5,5"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.1 }}
-            transition={{
-              duration: 2,
-              delay: line.delay,
-              repeat: Infinity,
-              repeatDelay: 2,
-            }}
-          />
-        ))}
-        <defs>
-          <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="rgb(6, 182, 212)" stopOpacity="0.3" />
-            <stop offset="100%" stopColor="rgb(168, 85, 247)" stopOpacity="0.3" />
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
   );
 };

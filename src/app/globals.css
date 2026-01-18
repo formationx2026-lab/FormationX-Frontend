@@ -1,89 +1,218 @@
 @import "tailwindcss";
 
-:root {
-  /* Light mode (unchanged) */
-  --background: #ffffff;
-  --foreground: #0a0a0a;
+/* --- 1. THEME CONFIGURATION (Tailwind v4) --- */
+@theme {
+  /* Colors - Mapping CSS vars to Tailwind utilities */
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
 
-  /* Brand – cyan-500 ONLY */
-  --primary: #06b6d4;                 /* cyan-500 */
-  --primary-hover: #0891b2;           /* cyan-600 */
-  --primary-soft: rgba(6, 182, 212, 0.15); /* cyan-500 / 15% */
-  --primary-glow: rgba(6, 182, 212, 0.35);
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
 
-  --border-soft: rgba(255, 255, 255, 0.1);
-}
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
-  --color-primary: var(--primary);
+  /* EXISTING PRIMARY */
+  --color-primary: hsl(var(--primary));
+  --color-primary1: var(--primary1);
   --color-primary-hover: var(--primary-hover);
   --color-primary-soft: var(--primary-soft);
-  --color-primary-glow: var(--primary-glow);
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-primary-glow: hsl(var(--primary-glow));
+  --color-primary-glow1: var(--primary-glow1);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* NEW "BRAND" COLORS (Renamed from your request) */
+  --color-brand: var(--brand);
+  --color-brand-hover: var(--brand-hover);
+  --color-brand-soft: var(--brand-soft);
+  --color-brand-glow: var(--brand-glow);
+  --color-brand-border: var(--brand-border-soft);
 
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(24px);
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  /* Animations */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-slow: pulse 3s ease-in-out infinite;
+  --animate-gradient: gradient 8s ease infinite;
+  --animate-shimmer: shimmer 3s infinite;
+  --animate-slide-up: slide-up 0.6s ease-out forwards;
+  --animate-fade-in: fade-in 0.6s ease-out forwards;
+  --animate-scale-in: scale-in 0.5s ease-out forwards;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+  @keyframes gradient {
+    0%, 100% { background-position: left center; background-size: 200% 200%; }
+    50% { background-position: right center; background-size: 200% 200%; }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  @keyframes slide-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: scale(0.96); }
+    to { opacity: 1; transform: scale(1); }
   }
 }
 
-.animate-slide-up {
-  animation: slide-up 0.6s ease forwards;
+/* --- 2. CSS VARIABLES (Cyberpunk Values + New Brand) --- */
+:root {
+  --background: 222 47% 5%;
+  --foreground: 180 100% 95%;
+
+  --card: 222 47% 8%;
+  --card-foreground: 180 100% 95%;
+
+  --popover: 222 47% 8%;
+  --popover-foreground: 180 100% 95%;
+
+  /* Existing Primary */
+  --primary: 180 100% 50%;
+  --primary1: #06b6d4;
+  --primary1-hover: #0891b2; 
+  --primary-soft: rgba(6, 182, 212, 0.15);
+  --primary-glow1: rgba(6, 182, 212, 0.35);
+  --primary-foreground: 222 47% 5%;
+  --primary-glow: 180 100% 60%;
+
+  /* NEW BRAND COLORS (From your request, renamed) */
+  --brand: #06b6d4;                 /* cyan-500 */
+  --brand-hover: #0891b2;           /* cyan-600 */
+  --brand-soft: rgba(6, 182, 212, 0.15);
+  --brand-glow: rgba(6, 182, 212, 0.35);
+  --brand-border-soft: rgba(255, 255, 255, 0.1);
+
+  --secondary: 25 100% 55%;
+  --secondary-foreground: 222 47% 5%;
+
+  --muted: 222 30% 15%;
+  --muted-foreground: 220 15% 55%;
+
+  --accent: 280 80% 60%;
+  --accent-foreground: 180 100% 95%;
+
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 210 40% 98%;
+
+  --border: 222 30% 18%;
+  --input: 222 30% 15%;
+  --ring: 180 100% 50%;
+
+  --radius: 0.75rem;
+
+  /* Custom Gradients */
+  --gradient-primary: linear-gradient(135deg, hsl(180, 100%, 50%), hsl(200, 100%, 60%));
+  --gradient-secondary: linear-gradient(135deg, hsl(25, 100%, 55%), hsl(40, 100%, 60%));
+  --gradient-card: linear-gradient(135deg, hsl(222, 47%, 8%), hsl(222, 47%, 12%));
+  --gradient-hero: radial-gradient(ellipse at 50% 0%, hsl(180, 100%, 50%, 0.15) 0%, transparent 60%);
+  
+  --shadow-glow-primary: 0 0 40px hsl(180, 100%, 50%, 0.3);
+  --shadow-glow-secondary: 0 0 40px hsl(25, 100%, 55%, 0.3);
 }
 
-@keyframes scale-in {
-  from {
-    opacity: 0;
-    transform: scale(0.96);
+/* --- 3. BASE RESET --- */
+@layer base {
+  *, ::after, ::before {
+    box-sizing: border-box;
+    border-color: hsl(var(--border)); 
+    border-style: solid; 
+    border-width: 0;
   }
-  to {
-    opacity: 1;
-    transform: scale(1);
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
   }
 }
 
-.animate-scale-in {
-  animation: scale-in 0.5s ease forwards;
-}
-
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
+/* --- 4. UTILITIES --- */
+/* Added the requested specific utilities here */
+@layer utilities {
+  .animate-gradient {
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fade-in {
-  animation: fade-in 0.6s ease forwards;
-}
-
-
-
-/* Dark mode – MAIN THEME (unchanged) */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+/* Custom Utilities (Tailwind v4 style) */
+@utility gradient-text {
+  @apply bg-clip-text text-transparent;
+  background-image: var(--gradient-primary);
+}
+
+@utility gradient-text-secondary {
+  @apply bg-clip-text text-transparent;
+  background-image: var(--gradient-secondary);
+}
+
+@utility glow-primary {
+  box-shadow: var(--shadow-glow-primary);
+}
+
+@utility glow-secondary {
+  box-shadow: var(--shadow-glow-secondary);
+}
+
+@utility card-gradient {
+  background-image: var(--gradient-card);
+}
+
+@utility hero-glow {
+  background-image: var(--gradient-hero);
+}
+
+/* FIX: Use standard CSS class for complex nesting to avoid parser errors */
+.neon-border {
+  position: relative;
+}
+.neon-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit; 
+  padding: 1px;
+  background: var(--gradient-primary);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
 }
