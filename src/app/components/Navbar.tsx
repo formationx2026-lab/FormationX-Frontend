@@ -220,7 +220,7 @@ const Navbar = () => {
                           transition={{ delay: index * 0.1 }}
                         >
                           <Link
-                            href="#"
+                            href="/spaces"
                             className="block px-5 py-2 text-sm transition-all group"
                             style={{ color: "#ededed" }} // Replaced var(--foreground) with standard light text
                           >
@@ -245,6 +245,8 @@ const Navbar = () => {
                     {/* Dropdown glow effect */}
                     <motion.div
                       className="absolute inset-0 -z-10"
+
+                      
                       style={{
                         // Replaced var(--primary-glow) with rgba(6, 182, 212, 0.35)
                         background: "radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.35), transparent 70%)",
@@ -253,6 +255,9 @@ const Navbar = () => {
                       animate={{ opacity: [0.05, 0.1, 0.05] }}
                       transition={{ duration: 2, repeat: Infinity }}
                     />
+
+
+                    
                   </motion.div>
                 )}
               </AnimatePresence>

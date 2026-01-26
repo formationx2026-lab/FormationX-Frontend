@@ -30,6 +30,6 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts"
-, "tailwind.config.js"  ],
+, "tailwind.config.js", "src/app/components/spaces/SpaceModal.tsx"  ],
   "exclude": ["node_modules"]
 }
