@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavLink } from "../types";
 import { navigationData } from "../data/navigation";
-import { ChevronDown, Menu, X } from "lucide-react"; // Using lucide for cleaner icons
+import { ChevronDown, Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -117,12 +117,21 @@ const Navbar = () => {
 
         {/* RIGHT ACTIONS */}
         <div className="flex items-center gap-3">
-          <Link href="#" className="hidden md:block px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors">
+          {/* Desktop Log In - UPDATED HREF */}
+          <Link 
+            href="/auth?mode=login" 
+            className="hidden md:block px-4 py-2 text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+          >
             Log in
           </Link>
-          <button className="hidden md:flex h-10 px-6 items-center justify-center rounded-full bg-primary text-white text-sm font-bold hover:shadow-[0_0_20px_rgba(var(--primary),0.3)] hover:brightness-110 transition-all active:scale-95">
+          
+          {/* Desktop Get Started - UPDATED HREF */}
+          <Link 
+            href="/auth?mode=signup" 
+            className="hidden md:flex h-10 px-6 items-center justify-center rounded-full bg-primary text-white text-sm font-bold hover:shadow-[0_0_20px_rgba(var(--primary),0.3)] hover:brightness-110 transition-all active:scale-95"
+          >
             Get Started
-          </button>
+          </Link>
 
           {/* MOBILE TOGGLE */}
           <button
@@ -169,9 +178,25 @@ const Navbar = () => {
                   )}
                 </motion.div>
               ))}
+              
               <div className="mt-8 pt-8 border-t border-border flex flex-col gap-4">
-                <button className="w-full h-12 rounded-xl bg-primary text-white font-bold">Get Started</button>
-                <button className="w-full h-12 rounded-xl bg-secondary text-foreground font-bold">Log In</button>
+                {/* Mobile Get Started - UPDATED HREF */}
+                <Link 
+                    href="/auth?mode=signup" 
+                    onClick={() => setOpen(false)} 
+                    className="w-full h-12 rounded-xl bg-primary text-white font-bold flex items-center justify-center"
+                >
+                    Get Started
+                </Link>
+                
+                {/* Mobile Log In - UPDATED HREF */}
+                <Link 
+                    href="/auth?mode=login" 
+                    onClick={() => setOpen(false)} 
+                    className="w-full h-12 rounded-xl bg-secondary text-foreground font-bold flex items-center justify-center"
+                >
+                    Log In
+                </Link>
               </div>
             </div>
           </motion.div>
