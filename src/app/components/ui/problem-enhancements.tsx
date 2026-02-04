@@ -8,7 +8,10 @@ import { Code, Terminal, Cpu, Server, Database, Zap, AlertTriangle } from "lucid
 export const BackgroundGrid = () => {
   return (
     <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
-      {/* Subtle Grid Pattern for Technical Feel */}
+      {/* 1. Aurora Gradient Base (From Global CSS) */}
+      <div className="absolute inset-0 bg-gradient-aurora opacity-80" />
+
+      {/* 2. Subtle Grid Pattern for Technical Feel */}
       <div 
         className="absolute inset-0 opacity-[0.4]"
         style={{
@@ -16,8 +19,9 @@ export const BackgroundGrid = () => {
           backgroundSize: '40px 40px'
         }}
       />
-      {/* Faded Gradient Overlay to soften edges */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+      
+      {/* 3. Faded Gradient Overlay to soften edges & blend with section */}
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
     </div>
   );
 };
